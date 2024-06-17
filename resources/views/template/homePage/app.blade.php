@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>E-perpus</title>
-    <link rel="stylesheet" href="{{ asset('best-ebook-website/css/style.css') }}" />
-    <link rel="stylesheet" href="{{ asset('best-ebook-website/pages/book-filter.css') }}" />
+    <link rel="stylesheet" href="{{ asset('best-ebook-website-asset/css/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('best-ebook-website-asset/pages/book-filter.css') }}" />
     <!--- google font link-->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -277,13 +277,13 @@
         </div>
     </footer>
     <button class="back-to-top"><i class="fa-solid fa-chevron-up"></i></button>
-    <script src="{{ asset('best-ebook-website/js/back-to-top.js') }}"></script>
+    <script src="{{ asset('best-ebook-website-asset/js/back-to-top.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
-    <script src="{{ asset('best-ebook-website/js/script.js') }}"></script>
-    <script src="{{ asset('best-ebook-website/js/repeat-js.js') }}"></script>
-    <script src="{{ asset('best-ebook-website/js/add-to-cart.js') }}"></script>
+    <script src="{{ asset('best-ebook-website-asset/js/script.js') }}"></script>
+    <script src="{{ asset('best-ebook-website-asset/js/repeat-js.js') }}"></script>
+    <script src="{{ asset('best-ebook-website-asset/js/add-to-cart.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 
     <script>
@@ -304,12 +304,11 @@
         }
     </script>
 
-    <script src="{{ asset('pdfjs-express/lib/webviewer.min.js') }}"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
         integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src=".{{ asset('best-ebook-website/js/increment-decrement.js') }}"></script>
+    <script src=".{{ asset('best-ebook-website-asset/js/increment-decrement.js') }}"></script>
 
     @yield('script')
 </body>
