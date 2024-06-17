@@ -30,13 +30,13 @@
         <div class="book-grid-container">
             <div class="book-collections">
                 <h4>Books</h4>
-                <div class="category">
+                {{-- <div class="category">
                     <div class="category-list">
-                        {{-- <button>Today</button>
+                        <button>Today</button>
                         <button>This Week</button>
-                        <button>This Month</button> --}}
+                        <button>This Month</button>
                     </div>
-                </div>
+                </div> --}}
                 <div class="books">
                     @foreach ($books as $item)
                         <div class="book-card">

@@ -129,7 +129,7 @@
                             <!-- Add more e-resources as needed -->
                         </div>
                     </li>
-                    <li><a href="pages/contact.html">Contact</a></li>
+                    <li><a href="{{route('home.contact')}}">Contact</a></li>
                     @auth
                         <button class="signup"><a href="{{ route('dashboard') }}">Dashboard</a></button>
                     @else
@@ -163,7 +163,7 @@
                         @csrf
                         <div class="search-field">
                             <input type="text" name="search" value="{{ request('search') }}"
-                                placeholder="Search over 30 million Book titles" />
+                                placeholder="Search Book titles" />
                             <button type="submit" class="search-icon">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </button>
@@ -186,9 +186,6 @@
             </nav>
         </header>
     @endif
-
-
-
 
     @yield('content')
 

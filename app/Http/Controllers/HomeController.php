@@ -52,4 +52,11 @@ class HomeController extends Controller
             'homePage' => false
         ]);
     }
+
+    public function contact()
+    {
+        return view('pages.homePage.contact-us', [
+            'homePage' => false
+        ]);
+    }
 }

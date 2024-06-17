@@ -36,6 +36,7 @@ Route::middleware([OnlyGuestMiddleware::class])->group(function(){
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/books', [HomeController::class, 'bukuPage'])->name('home.bukuPage');
 Route::get('/books/{id}/detail-book', [HomeController::class, 'detailBook'])->name('home.detailBuku');
+Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
 
 Route::get('/pdf-viewer', [PdfViewController::class, 'show']);
 
