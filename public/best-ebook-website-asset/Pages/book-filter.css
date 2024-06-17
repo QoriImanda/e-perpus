@@ -1684,7 +1684,11 @@ table .heading {
 
 @media only screen and (max-width: 848px) {
     .navbar-2 .search-box {
-        display: none;
+        display: flex;
+    }
+
+    .navbar-2 .search-field {
+        width: 100%;
     }
 
     .filter .book-grid-container .book-collections .books {

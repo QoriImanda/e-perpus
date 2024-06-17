@@ -16,7 +16,7 @@
                 </div> --}}
             </div>
             <div class="img">
-                <img src="{{ asset('best-ebook-website/images/logo-book.png') }}" alt="" />
+                <img src="{{ asset('best-ebook-website-asset/images/logo-book.png') }}" alt="" />
             </div>
         </div>
         <div class="square-dot">

@@ -6,8 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>E-perpus</title>
-    <link rel="stylesheet" href="{{ asset('best-ebook-website-asset/css/style.css') }}" />
-    <link rel="stylesheet" href="{{ asset('best-ebook-website-asset/pages/book-filter.css') }}" />
+    @if ($homePage == true)
+        <link rel="stylesheet" href="{{ asset('best-ebook-website-asset/css/style.css') }}" />
+    @else
+        <link rel="stylesheet" href="{{ asset('best-ebook-website-asset/css/style.css') }}" />
+        <link rel="stylesheet" href="{{ asset('best-ebook-website-asset/pages/book-filter.css') }}" />
+    @endif
     <!--- google font link-->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -95,10 +99,10 @@
             <nav class="navbar">
                 <div class="logo">
                     <div class="img">
-                        <img src="{{ asset('best-ebook-website/images/logo.png') }}" alt="" />
+                        <img src="{{ asset('best-ebook-website-asset/images/logo.png') }}" alt="" />
                     </div>
                     <div class="logo-header">
-                        <h4><a href="index.html">E-Perpus</a></h4>
+                        <h4><a href="#">E-Perpus</a></h4>
                         <small>Book Website</small>
                     </div>
                 </div>
@@ -106,11 +110,11 @@
                     <div class="logo">
                         <div class="title">
                             <div class="img">
-                                <img src="images/logo.png" alt="" />
+                                <img src="{{ asset('best-ebook-website-asset/images/logo.png') }}" alt="" />
                             </div>
                             <div class="logo-header">
-                                <h4><a href="index.html">Bookoe</a></h4>
-                                <small>Book Store Website</small>
+                                <h4><a href="#">Bookoe</a></h4>
+                                <small>Book Website</small>
                             </div>
                         </div>
                         <button class="close"><i class="fa-solid fa-xmark"></i></button>
@@ -146,19 +150,18 @@
         <header>
             <nav class="navbar-2">
                 <div class="logo">
-                    <div class="img">
-                        <img src="../images/logo.png" alt="" />
+                    {{-- <div class="img">
+                        <img src="{{ asset('best-ebook-website-asset/images/logo.png') }}" alt="" />
                     </div>
                     <div class="title">
                         <h4>Bookoe<i class="fa-solid fa-grid"></i></h4>
-                        <small>Book Store Website</small>
-                    </div>
+                        <small>Book Website</small>
+                    </div> --}}
                 </div>
                 <div class="search-box">
                     <form action="{{ route('home.bukuPage') }}" method="get">
                         @csrf
                         <div class="search-field">
-
                             <input type="text" name="search" value="{{ request('search') }}"
                                 placeholder="Search over 30 million Book titles" />
                             <button type="submit" class="search-icon">
@@ -169,7 +172,7 @@
 
                 </div>
                 <div class="nav-end">
-                    <button class="likebtn">
+                    {{-- <button class="likebtn">
                         <i class="fa-regular fa-heart"></i> <span>35</span>
                     </button>
                     <button class="cart">
@@ -178,7 +181,7 @@
                     <div class="profile-img">
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiM0o_5tIn0DAmbB2wKS4GvurHctTwxD5om2vi4NOsj1ODDSGULrviZ-QV3ul8JYEMfO0&usqp=CAU"
                             alt="" />
-                    </div>
+                    </div> --}}
                 </div>
             </nav>
         </header>
