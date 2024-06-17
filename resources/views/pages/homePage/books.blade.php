@@ -1,7 +1,7 @@
 @extends('template.homePage.app')
 
 @section('content')
-    <nav class="navbar-2">
+    {{-- <nav class="navbar-2">
         <div class="logo">
         </div>
         <div class="search-box">
@@ -19,7 +19,7 @@
         </div>
         <div class="nav-end">
         </div>
-    </nav>
+    </nav> --}}
     <div class="breadcrumb-container">
         <ul class="breadcrumb">
             <li><a href="/">Home</a></li>

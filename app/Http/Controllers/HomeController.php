@@ -34,7 +34,8 @@ class HomeController extends Controller
         ->latest('buku.created_at')->paginate(16);
 
         return view('pages.homePage.books', [
-            'books' => $books
+            'books' => $books,
+            'homePage' => false
         ]);
     }
 
@@ -47,7 +48,8 @@ class HomeController extends Controller
         return view('pages.homePage.detail-book', [
             'book' => $book,
             'relatedBook' => $relatedBook,
-            'randomBooks' => $randomBook
+            'randomBooks' => $randomBook,
+            'homePage' => false
         ]);
     }
 }

@@ -89,60 +89,103 @@
 </style>
 
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="logo">
-                <div class="img">
-                    <img src="{{ asset('best-ebook-website/images/logo.png') }}" alt="" />
-                </div>
-                <div class="logo-header">
-                    <h4><a href="index.html">E-Perpus</a></h4>
-                    <small>Book Website</small>
-                </div>
-            </div>
-            <ul class="nav-list">
-                <div class="logo">
-                    <div class="title">
-                        <div class="img">
-                            <img src="images/logo.png" alt="" />
-                        </div>
-                        <div class="logo-header">
-                            <h4><a href="index.html">Bookoe</a></h4>
-                            <small>Book Store Website</small>
-                        </div>
-                    </div>
-                    <button class="close"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-                <li><a href="/">Home</a></li>
-                <li><a href="{{ route('home.bukuPage') }}">Books</a></li>
-                {{-- <li><a href="pages/service.html">E-Resources</a></li> --}}
-                <li class="dropdown" style="z-index: 99999;">
-                    <a href="#" class="dropbtn">E-Resources <i class="fa-solid fa-chevron-down"></i></a>
-                    <div class="dropdown-content">
-                        <a href="pages/service.html">Service 1</a>
-                        <a href="#">Service 2</a>
-                        <a href="#">Service 2</a>
-                        <a href="#">Service 2</a>
-                        <!-- Add more e-resources as needed -->
-                    </div>
-                </li>
-                <li><a href="pages/contact.html">Contact</a></li>
-                @auth
-                    <button class="signup"><a href="{{ route('dashboard') }}">Dashboard</a></button>
-                @else
-                    <button class="signup"><a href="{{ route('login') }}">Log In</a></button>
-                    <button class="signup">
-                        <i class="fa-solid fa-user"></i><a href="{{ route('register') }}">Sign Up</a>
-                    </button>
-                @endauth
 
-            </ul>
-            <div class="hamburger">
-                <div class="line"></div>
-                <div class="line"></div>
-            </div>
-        </nav>
-    </header>
+    @if ($homePage == true)
+        <header>
+            <nav class="navbar">
+                <div class="logo">
+                    <div class="img">
+                        <img src="{{ asset('best-ebook-website/images/logo.png') }}" alt="" />
+                    </div>
+                    <div class="logo-header">
+                        <h4><a href="index.html">E-Perpus</a></h4>
+                        <small>Book Website</small>
+                    </div>
+                </div>
+                <ul class="nav-list">
+                    <div class="logo">
+                        <div class="title">
+                            <div class="img">
+                                <img src="images/logo.png" alt="" />
+                            </div>
+                            <div class="logo-header">
+                                <h4><a href="index.html">Bookoe</a></h4>
+                                <small>Book Store Website</small>
+                            </div>
+                        </div>
+                        <button class="close"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="{{ route('home.bukuPage') }}">Books</a></li>
+                    {{-- <li><a href="pages/service.html">E-Resources</a></li> --}}
+                    <li class="dropdown" style="z-index: 99999;">
+                        <a href="#" class="dropbtn">E-Resources <i class="fa-solid fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a target="_blank" href="https://e-resources.perpusnas.go.id/">Perpustakaan Nasional</a>
+                            <!-- Add more e-resources as needed -->
+                        </div>
+                    </li>
+                    <li><a href="pages/contact.html">Contact</a></li>
+                    @auth
+                        <button class="signup"><a href="{{ route('dashboard') }}">Dashboard</a></button>
+                    @else
+                        <button class="signup"><a href="{{ route('login') }}">Log In</a></button>
+                        <button class="signup">
+                            <i class="fa-solid fa-user"></i><a href="{{ route('register') }}">Sign Up</a>
+                        </button>
+                    @endauth
+
+                </ul>
+                <div class="hamburger">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </nav>
+        </header>
+    @else
+        <header>
+            <nav class="navbar-2">
+                <div class="logo">
+                    <div class="img">
+                        <img src="../images/logo.png" alt="" />
+                    </div>
+                    <div class="title">
+                        <h4>Bookoe<i class="fa-solid fa-grid"></i></h4>
+                        <small>Book Store Website</small>
+                    </div>
+                </div>
+                <div class="search-box">
+                    <form action="{{ route('home.bukuPage') }}" method="get">
+                        @csrf
+                        <div class="search-field">
+
+                            <input type="text" name="search" value="{{ request('search') }}"
+                                placeholder="Search over 30 million Book titles" />
+                            <button type="submit" class="search-icon">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="nav-end">
+                    <button class="likebtn">
+                        <i class="fa-regular fa-heart"></i> <span>35</span>
+                    </button>
+                    <button class="cart">
+                        <a href="cart-item.html"><i class="fa-solid fa-cart-shopping"></i> <span>4</span></a>
+                    </button>
+                    <div class="profile-img">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiM0o_5tIn0DAmbB2wKS4GvurHctTwxD5om2vi4NOsj1ODDSGULrviZ-QV3ul8JYEMfO0&usqp=CAU"
+                            alt="" />
+                    </div>
+                </div>
+            </nav>
+        </header>
+    @endif
+
+
+
 
     @yield('content')
 
