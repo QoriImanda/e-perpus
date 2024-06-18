@@ -13,9 +13,7 @@
                         <div class="small-box bg-info">
                             <div class="inner">
                                 <h3>{{ $buku }}</h3>
-
                                 <p>Banyak Buku</p>
-                                
                             </div>
                             <div class="icon">
                                 <i class="fas fa-book"></i>
