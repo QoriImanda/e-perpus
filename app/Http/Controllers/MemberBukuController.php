@@ -28,7 +28,7 @@ class MemberBukuController extends Controller
                     ->orWhere('pengarang', 'like', "%$search%");
                 });
             }
-            
+
             $buku = $buku->get();
             return DataTables::of($buku)
                 ->addColumn('gambar', function ($row){
@@ -57,7 +57,7 @@ class MemberBukuController extends Controller
                     $button = '<div class="row">
                                     <div class="col-12 d-flex justify-content-center">
                                         <button type="button" title="Detail" data-id="'. base64_encode($row->id) .'" class="btn btn-info btn-sm mt-1 mb-1 ml-1 mr-1 btn-open-modal-detail"><i class="fas fa-eye"></i></button>
-                                        
+
                                         <button type="button" title="Pinjam Buku" data-id="'. base64_encode($row->id) .'" class="btn btn-primary btn-sm mt-1 mb-1 ml-1 mr-1 btn-open-modal-pinjam"><i class="fas fa-plus"></i></button>
                                     </div>
                                 </div>';
@@ -74,7 +74,7 @@ class MemberBukuController extends Controller
         if($request->ajax()){
             $id = $request->id;
             $get_buku = Buku::GetBukuById($id);
-            
+
             $get_kategori = Kategori::GetKategoriById($get_buku->id_kategori);
 
             return response()->json([
@@ -153,7 +153,7 @@ class MemberBukuController extends Controller
     {
         if($request->ajax()){
             $peminjaman = Sirkulasi::GetSirkulasiById($request);
-            
+
             if($peminjaman->status == Sirkulasi::STATUS_SETELAH_BAYAR_DENDAM){
                 $dendam_sudah_dibayar = Denda::where('id_sirkulasi',$peminjaman->id)->where('already_paid', TRUE)->first();
                 if($dendam_sudah_dibayar != null){
@@ -171,19 +171,19 @@ class MemberBukuController extends Controller
                 }
             }else{
                 $tanggal_sekarang = Carbon::now();
-    
+
                 $new_format_tanggal_sekarang = date('Y-m-d H:i:s', strtotime($tanggal_sekarang));
                 $new_format_tanggal_pengembalian = date('Y-m-d H:i:s', strtotime($peminjaman->tanggal_pengembalian));
-    
+
                 $format_tanggal_sekarang        = new DateTime($new_format_tanggal_sekarang);
                 $format_tanggal_pengembalian    = new DateTime($new_format_tanggal_pengembalian);
-    
+
                 if($format_tanggal_sekarang > $format_tanggal_pengembalian){
                     $response = Denda::AddDendaByIdSirkulasi($peminjaman->id);
-    
+
                     $peminjaman->status = Sirkulasi::STATUS_BAYAR_DENDAM;
                     $peminjaman->update();
-    
+
                     return $response->getData();
                 }else{
                     return response()->json([
@@ -193,7 +193,7 @@ class MemberBukuController extends Controller
                     ]);
                 }
             }
-            
+
         }
     }
 
@@ -202,7 +202,7 @@ class MemberBukuController extends Controller
         if($request->ajax())
         {
             $response = Sirkulasi::MemberMengembalikan($request);
-            
+
             return $response->getData();
         }
     }
