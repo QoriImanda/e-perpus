@@ -15,6 +15,7 @@
                                 <h3>{{ $buku }}</h3>
 
                                 <p>Banyak Buku</p>
+                                
                             </div>
                             <div class="icon">
                                 <i class="fas fa-book"></i>
