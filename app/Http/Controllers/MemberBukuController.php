@@ -73,6 +73,7 @@ class MemberBukuController extends Controller
     {
         if($request->ajax()){
             $id = $request->id;
+            // dd($id);
             $get_buku = Buku::GetBukuById($id);
 
             $get_kategori = Kategori::GetKategoriById($get_buku->id_kategori);
@@ -100,7 +101,24 @@ class MemberBukuController extends Controller
         if($request->ajax())
         {
             $id_user_login = Auth::user()->id;
-            $buku = Sirkulasi::latest()->where('id_user', $id_user_login)->with('Buku')->whereBetween('status', [Sirkulasi::STATUS_MENUNGGU_PERSETUJUAN,Sirkulasi::STATUS_SETELAH_BAYAR_DENDAM]);
+            $buku = Sirkulasi::latest()->where('id_user', $id_user_login)->with('Buku')
+            ->whereIn('status', [
+                Sirkulasi::STATUS_MENUNGGU_PERSETUJUAN,
+                Sirkulasi::STATUS_BAYAR_DENDAM,
+                Sirkulasi::STATUS_SETELAH_BAYAR_DENDAM,
+                Sirkulasi::STATUS_MENUNGGU_PERSETUJUAN_PENGEMBALIAN,
+                Sirkulasi::STATUS_APPROVAL_ADMIN,
+                
+            ])
+            ->orderByRaw("FIELD(status, " . implode(',', [
+                Sirkulasi::STATUS_MENUNGGU_PERSETUJUAN,
+                Sirkulasi::STATUS_BAYAR_DENDAM,
+                Sirkulasi::STATUS_SETELAH_BAYAR_DENDAM,
+                Sirkulasi::STATUS_MENUNGGU_PERSETUJUAN_PENGEMBALIAN,
+                Sirkulasi::STATUS_APPROVAL_ADMIN,
+
+            ]) . ")")
+            ->orderBy('status', 'asc');
             $buku = $buku->get();
             return DataTables::of($buku)
                 ->addColumn('gambar', function ($row){
@@ -124,15 +142,17 @@ class MemberBukuController extends Controller
                 })
                 ->addColumn('status', function ($row){
                     if($row->status == Sirkulasi::STATUS_MENUNGGU_PERSETUJUAN){
-                        return '<div class"row"><div class="col-md-12 d-flex justify-content-center"><span class="badge badge-secondary">Menunggu Persetujuan</span></div></div>';
+                        return '<div class"row"><div class="col-md-12 d-flex justify-content-center"><span class="badge badge-secondary">Menunggu Persetujuan Peminjaman</span></div></div>';
                     }elseif($row->status == Sirkulasi::STATUS_APPROVAL_ADMIN || $row->status == Sirkulasi::STATUS_SETELAH_BAYAR_DENDAM){
                         return '<div class"row"><div class="col-md-12 d-flex justify-content-center"><span class="badge badge-success">Approve Admin</span></div></div>';
-                    }else{
+                    }elseif ($row->status == Sirkulasi::STATUS_MENUNGGU_PERSETUJUAN_PENGEMBALIAN) {
+                        return '<div class"row"><div class="col-md-12 d-flex justify-content-center"><span class="badge badge-primary">Menunggu Persetujuan Pengembalian</span></div></div>';
+                    }else {
                         return '<div class"row"><div class="col-md-12 d-flex justify-content-center"><span class="badge badge-danger">Bayar Denda Dahulu</span></div></div>';
                     }
                 })
                 ->addColumn('aksi', function ($row){
-                    if($row->status == Sirkulasi::STATUS_MENUNGGU_PERSETUJUAN){
+                    if($row->status == Sirkulasi::STATUS_MENUNGGU_PERSETUJUAN || $row->status == Sirkulasi::STATUS_MENUNGGU_PERSETUJUAN_PENGEMBALIAN){
                         return '<small class="font-italic">Tidak ada aksi.</small>';
                     }else{
                         $button = '<div class="row">

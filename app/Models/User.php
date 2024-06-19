@@ -48,10 +48,11 @@ class User extends Authenticatable
 
     public static function AdminCheckWhenLogin($validated)
     {
-        $check = User::where('nik', $validated['nik'])
+        $check = User::where('username', $validated['username'])
                     ->where('is_admin', true)
                     ->first();
-        return (!$check == null ? true : false); 
+                    // dd($validated['username']);
+        return (!$check == null ? true : false);
     }
 
     public static function MakeAccount($validated)
@@ -61,6 +62,7 @@ class User extends Authenticatable
             $new = new User();
             $new->nama = $validated['full_name'];
             $new->nik = $validated['nik'];
+            $new->username = $validated['username'];
             $new->password = Hash::make($validated['password']);
             $new->is_admin = false;
             $new->save();

@@ -49,7 +49,7 @@
       <form action="{{route('doLogin')}}" method="post">
         @csrf
         <div class="input-group mb-3">
-          <input type="text" name="nik" onkeypress="return /[0-9a-zA-Z]/i.test(event.key)" value="{{ old('nik') }}" class="form-control" placeholder="NIK">
+          <input type="text" name="username" value="{{ old('username') }}" class="form-control" placeholder="Username">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-id-card"></span>

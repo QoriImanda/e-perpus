@@ -92,6 +92,7 @@ Route::group(['middleware' => ['role:admin|member'], 'middleware' => OnlyRoleMid
         Route::controller(ApprovePeminjamanPengembalianController::class)->group(function(){
             Route::get('/ajax/datatable-peminjaman', 'datatablePeminjaman');
             Route::post('/ajax/approve/pinjam-buku', 'approvePeminjaman');
+            Route::post('/ajax/approve-pengembalian/pinjam-buku', 'approvePengembalian');
         });
         /*                                      PEMINJAMAN BUKU                                                     */
 

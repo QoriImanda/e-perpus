@@ -75,9 +75,9 @@
 
                 <hr>
                 <div class="row">
-                  <div class="col-md-6 mt-2">
+                  {{-- <div class="col-md-6 mt-2">
                     <a href="{{route('admin.master-export-pdf-buku', base64_encode($buku->id)) }}" class="btn btn-danger btn-block" target="_blank"><b>Export PDF</b></a>
-                  </div>
+                  </div> --}}
                   <div class="col-md-6 mt-2">
                     <a href="{{route('admin.master-buku')}}" class="btn btn-default btn-block"><b>Kembali</b></a>
                   </div>

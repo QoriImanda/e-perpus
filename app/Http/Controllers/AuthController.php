@@ -13,6 +13,7 @@ class AuthController extends Controller
         $validated = $request->validate([
             'full_name' => 'required',
             'nik' => 'required|unique:users,nik',
+            'username' => 'required|unique:users,username',
             'password' => 'required|confirmed|min:6',
             'password_confirmation' => 'required|min:6',
         ]);
@@ -27,31 +28,32 @@ class AuthController extends Controller
 
     public function doLogin(Request $request){
         $validated = $request->validate([
-            'nik' => 'required',
+            'username' => 'required',
             'password' => 'required'
         ]);
 
-        $admin_check = User::AdminCheckWhenLogin($validated); 
-        $credentials = $request->only('nik', 'password');
+        $admin_check = User::AdminCheckWhenLogin($validated);
+        $credentials = $request->only('username', 'password');
+        $check_user = User::where('username', $request->username)->first();
         if($admin_check == true){
             if(Auth::attempt($credentials)){
-                $request->session()->put('user_login', $credentials['nik']);
+                $request->session()->put('user_login', $check_user->nik);
                 return redirect()->route('dashboard');
             }else{
-                return back()->with('err', 'NIK atau Password Salah');
+                return back()->with('err', 'Username atau Password Salah');
             }
         }else{
             if(Auth::attempt($credentials)){
-                $request->session()->put('user_login', $credentials['nik']);
+                $request->session()->put('user_login', $check_user->nik);
                 return redirect()->route('dashboard');
             }else{
-                return back()->with('err', 'NIK atau Password Salah');
+                return back()->with('err', 'Username atau Password Salah');
             }
         }
     }
 
     public function doLogout(Request $request){
-        
+
         Auth::logout();
         $request->session()->forget('user_login');
         return redirect('/login')->with('success', 'Silahkan Login Kembali');

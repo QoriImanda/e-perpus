@@ -23,6 +23,8 @@ class Sirkulasi extends Model
     CONST STATUS_BAYAR_DENDAM = 3;
     CONST STATUS_SETELAH_BAYAR_DENDAM = 4;
     CONST STATUS_PENGEMBALIAN_APPROVAL_ADMIN = 5;
+    CONST STATUS_MENUNGGU_PERSETUJUAN_PENGEMBALIAN = 6;
+
 
     public function Buku()
     {
@@ -106,6 +108,37 @@ class Sirkulasi extends Model
         }
     }
 
+    public static function AdminApprovePengembalian($request)
+    {
+        DB::beginTransaction();
+        try {
+
+            $peminjaman = Sirkulasi::findOrFail(base64_decode($request->id));
+            $peminjaman->status = Sirkulasi::STATUS_PENGEMBALIAN_APPROVAL_ADMIN;
+            $peminjaman->tanggal_pengembalian = Carbon::now()->addDays(7);
+            $peminjaman->update();
+
+            $buku = Buku::GetBukuById(base64_encode($peminjaman->id_buku));
+            $buku->jumlah_stok = $buku->jumlah_stok - 1;
+            $buku->update();
+
+            DB::commit();
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'Approve Buku Berhasil.'
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::info($e);
+
+            return response()->json([
+                'status' => 400,
+                'message' => 'Approve Buku Gagal. Hubungi Developer Aplikasi.'
+            ]);
+        }
+    }
+
     public static function MemberMengembalikan($request)
     {
         DB::beginTransaction();
@@ -116,7 +149,7 @@ class Sirkulasi extends Model
             $buku->jumlah_stok = $buku->jumlah_stok + 1;
             $buku->update();
 
-            $pengembalian->status = Sirkulasi::STATUS_PENGEMBALIAN_APPROVAL_ADMIN;
+            $pengembalian->status = Sirkulasi::STATUS_MENUNGGU_PERSETUJUAN_PENGEMBALIAN;
             $pengembalian->update();
 
             DB::commit();

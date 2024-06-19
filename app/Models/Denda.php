@@ -60,7 +60,7 @@ class Denda extends Model
         DB::beginTransaction();
         try {
             $sirkulasi = Sirkulasi::findOrFail($id);
-            $sirkulasi->status = Sirkulasi::STATUS_SETELAH_BAYAR_DENDAM;
+            $sirkulasi->status = Sirkulasi::STATUS_PENGEMBALIAN_APPROVAL_ADMIN;
             $sirkulasi->update();
 
             $denda = Denda::where('id_sirkulasi', $sirkulasi->id)->first();
