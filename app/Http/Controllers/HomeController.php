@@ -10,8 +10,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $newBook = Buku::latest()->limit(3)->get();
-        $books = Buku::inRandomOrder()->limit(5)->get();
+        $newBook = Buku::latest()->limit(4)->get();
+        $books = Buku::inRandomOrder()->limit(  10)->get();
         // dd(Buku::count());
         return view('pages.homePage.index', [
             'newBooks' => $newBook,

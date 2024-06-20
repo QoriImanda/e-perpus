@@ -207,8 +207,9 @@
                             <span>thriller</span> --}}
                             <span>{{ $itemBook->Kategori->kategori }}</span>
                         </div>
-                        <p>
-                            {{ $itemBook->sinopsis }}
+                        <p style="text-align: justify;">
+                            <!-- {{ $itemBook->sinopsis }} -->
+                            {{substr($itemBook->sinopsis, 0, 100)}}{{strlen($itemBook->sinopsis) > 200 ? '...' : ''}}
                         </p>
                         <small>{{ $itemBook->pengarang }}</small>
                         <div class="offer-bottom">

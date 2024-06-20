@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
+use DateTime;
 
 class Denda extends Model
 {
@@ -20,11 +22,19 @@ class Denda extends Model
         DB::beginTransaction();
         try {
             $check_sirkulasi = Denda::where('id_sirkulasi', $id)->first();
+            $sirkulasi = Sirkulasi::find($id);
+            $tglPengembalian = $sirkulasi->tanggal_pengembalian;
+            $tglSekarang = Carbon::now()->format('Y-m-d H:s:i');
+            $start = new DateTime($tglPengembalian);
+            $end = new DateTime($tglSekarang);
+
+            $interval = $start->diff($end);
+            $jarak_hari = $interval->days;
+
             if($check_sirkulasi == null){
-                
                 $denda = new Denda();
                 $denda->id_sirkulasi = $id;
-                $denda->denda_sebesar = 1000;
+                $denda->denda_sebesar = 1000 * $jarak_hari;
                 $denda->already_paid = FALSE;
                 $denda->save();
     

@@ -542,6 +542,7 @@
                         id: id_for_kembalikan
                     },
                     success: function(res) {
+                    console.log(res);
                         if (res.status == 200) {
                             if (res.type == 1) {
                                 $('.image-modal-pengembalian').attr('src',
