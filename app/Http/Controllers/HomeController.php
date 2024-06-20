@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
 use App\Models\Buku;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,6 +21,8 @@ class HomeController extends Controller
             'bookCounts' => Buku::count(),
             'homePage' => true
         ]);
+
+        $time = new DateTime;
     }
 
     public function bukuPage()
