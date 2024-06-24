@@ -34,10 +34,10 @@ class Denda extends Model
             if($check_sirkulasi == null){
                 $denda = new Denda();
                 $denda->id_sirkulasi = $id;
-                $denda->denda_sebesar = 1000 * $jarak_hari;
+                $denda->denda_sebesar = 500 * $jarak_hari;
                 $denda->already_paid = FALSE;
                 $denda->save();
-    
+
                 DB::commit();
                 return response()->json([
                     'status' => 200,
