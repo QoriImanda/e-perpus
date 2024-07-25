@@ -85,13 +85,13 @@
                             <div class="col-lg-10">
                                 <label for="search">Search</label>
                                 <input type="text" class="form-control" id="search" name="search"
-                                    value="{{ old('search', $search) }}" placeholder="Search:">
+                                    value="{{ old('search', $search) }}" placeholder="Ketik Sesuatu...">
                             </div>
                         </div>
                         <div class="row mb-3 mt-3">
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary btn-search ml-1 float-right"><i
-                                        class="fas fa-filter"></i> Filter</button>
+                                        class="fas fa-filter"></i> Seacrh</button>
                             </div>
                         </div>
                     </form>
