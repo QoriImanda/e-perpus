@@ -214,7 +214,7 @@
                         <small>{{ $itemBook->pengarang }}</small>
                         <div class="offer-bottom">
                             @if ($itemBook->file_book)
-                                <a href="#" class="cartbtn"><i class="fa-solid fa-book"></i>Reading</a>
+                                <a href="{{route('home.detailBuku', $itemBook->id)}}" class="cartbtn"><i class="fa-solid fa-book"></i>Reading</a>
                             @endif
                             {{-- <div class="price">
                                 <strong><span>$</span>18.7</strong>
